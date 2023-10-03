@@ -119,7 +119,7 @@ fake_deploy_containers-a7_internal:
   stage: deploy_containers
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64$DATADOG_AGENT_BUILDIMAGES_SUFFIX:$DATADOG_AGENT_BUILDIMAGES
   rules:
-    when: on_success
+    - when: on_success
   script:
     - echo "Job deploy container"
 
@@ -194,7 +194,7 @@ check_failure_for_manual:
   stage: deploy_containers
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64$DATADOG_AGENT_BUILDIMAGES_SUFFIX:$DATADOG_AGENT_BUILDIMAGES
   rules:
-    !reference [.on_deploy_rc_failure]
+    - when: on_failure
   script:
     - echo "Job in previous stage failed, enabling manual deploy of images"
 
