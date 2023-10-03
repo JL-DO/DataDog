@@ -554,7 +554,7 @@ require github.com/lorenzosaino/go-sysctl v0.3.1
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
-	github.com/DataDog/agent-payload/v5 v5.0.97
+	github.com/DataDog/agent-payload/v5 v5.0.98-0.20231003101510-a84f432360ae
 	github.com/DataDog/datadog-agent/pkg/networkdevice/profile v0.49.0-rc.1
 	github.com/DataDog/datadog-agent/pkg/proto v0.49.0-rc.1
 	github.com/DataDog/opentelemetry-mapping-go/pkg/otlp/logs v0.8.0
