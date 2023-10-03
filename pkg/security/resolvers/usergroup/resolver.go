@@ -14,14 +14,16 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/DataDog/datadog-agent/pkg/security/resolvers/cgroup"
 	cgroupModel "github.com/DataDog/datadog-agent/pkg/security/resolvers/cgroup/model"
 	"github.com/DataDog/datadog-agent/pkg/security/seclog"
 	"github.com/DataDog/datadog-agent/pkg/security/utils"
-	"golang.org/x/time/rate"
 
+	"github.com/avast/retry-go/v4"
 	lru "github.com/hashicorp/golang-lru/v2"
+	"golang.org/x/time/rate"
 )
 
 const refreshCacheRateLimit = 10
@@ -48,18 +50,22 @@ type containerFS struct {
 }
 
 // Open implements the fs.FS interface for containers
-func (fs *containerFS) Open(filename string) (fs.File, error) {
-	for _, rootCandidatePID := range fs.cgroup.GetPIDs() {
-		file, err := os.Open(filepath.Join(utils.ProcRootPath(rootCandidatePID), filename))
-		if err != nil {
-			seclog.Errorf("failed to read %s for pid %d of container %s: %s", filename, rootCandidatePID, fs.cgroup.ID, err)
-			continue
+func (fs *containerFS) Open(filename string) (file fs.File, err error) {
+	if err := retry.Do(func() error {
+		for _, rootCandidatePID := range fs.cgroup.GetPIDs() {
+			if file, err = os.Open(filepath.Join(utils.ProcRootPath(rootCandidatePID), filename)); err != nil {
+				seclog.Warnf("failed to read %s for pid %d of container %s: %s", filename, rootCandidatePID, fs.cgroup.ID, err)
+				continue
+			}
+			return nil
 		}
 
-		return file, nil
+		return fmt.Errorf("failed to resolve root filesystem for %s", fs.cgroup.ID)
+	}, retry.Delay(20*time.Millisecond), retry.Attempts(10)); err != nil {
+		return nil, err
 	}
 
-	return nil, fmt.Errorf("failed to resolve root filesystem for %s", fs.cgroup.ID)
+	return file, nil
 }
 
 type hostFS struct{}
