@@ -36,12 +36,12 @@
     - .kitchen_azure_x64
   needs: ["deploy_suse_rpm_testing_x64-a7"]
 
-.kitchen_scenario_suse_arm64_a7:
+.kitchen_scenario_suse_arm64_a6:
   extends:
-    - .kitchen_agent_a7
+    - .kitchen_agent_a6
     - .kitchen_os_suse
     - .kitchen_ec2_arm64
-  needs: ["deploy_suse_rpm_testing_arm64-a7"]
+  needs: ["deploy_suse_rpm_testing_arm64-a6"]
 
 .kitchen_scenario_suse_arm64_a7:
   extends:
