@@ -106,7 +106,7 @@ kitchen_suse_install_script_agent_arm64-a6:
 kitchen_suse_install_script_agent_arm64-a7:
   # Run install script test on branches, on a reduced number of platforms
   rules:
-    !reference [.on_default_kitchen_tests_a7]
+    !reference [.on_kitchen_tests_a7]
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_arm64_a7
