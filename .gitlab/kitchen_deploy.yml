@@ -232,7 +232,7 @@ deploy_suse_rpm_testing_arm64-a7:
     !reference [.on_kitchen_tests_a7]
   stage: kitchen_deploy
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["arch:arm64"]
+  tags: ["arch:amd64"]
   needs: ["agent_suse-arm64-a7", "iot_agent_suse-arm64", "dogstatsd_suse-arm64", "lint_linux-arm64", "tests_rpm-arm64-py3"]
   variables:
     DD_PIPELINE_ID: $CI_PIPELINE_ID-a7
