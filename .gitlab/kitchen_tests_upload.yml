@@ -47,7 +47,6 @@ kitchen_tests_upload_common:
     - kitchen_suse_install_script_agent_x64-a7
     - kitchen_suse_install_script_dogstatsd_x64-a7
     - kitchen_suse_install_script_iot_agent_x64-a7
-    - kitchen_suse_install_script_agent_arm64-a6
     - kitchen_suse_install_script_agent_arm64-a7
     - kitchen_suse_install_script_dogstatsd_arm64-a7
     - kitchen_suse_install_script_iot_agent_arm64-a7
@@ -57,7 +56,6 @@ kitchen_tests_upload_common:
     - kitchen_suse_upgrade7_agent_x64-a7
     - kitchen_suse_upgrade7_iot_agent_x64-a7
     - kitchen_suse_process_agent_arm64-a7
-    - kitchen_suse_upgrade6_agent_arm64-a6
     - kitchen_suse_upgrade6_agent_arm64-a7
     - kitchen_suse_upgrade7_agent_arm64-a7
     - kitchen_suse_upgrade7_iot_agent_arm64-a7
