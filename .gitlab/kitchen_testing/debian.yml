@@ -177,6 +177,7 @@ kitchen_debian_process_agent-a7:
 
 fake_kitchen_failing:
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64$DATADOG_AGENT_BUILDIMAGES_SUFFIX:$DATADOG_AGENT_BUILDIMAGES
+  tags: ["arch:amd64"]
   stage: kitchen_testing
   script:
     - exit 1
