@@ -846,7 +846,7 @@ shared_examples_for 'an Agent that is removed' do
       if system('which apt-get &> /dev/null')
         expect(system("sudo apt-get -q -y remove #{get_agent_flavor} > /dev/null")).to be_truthy
       elsif system('which yum &> /dev/null')
-        expect(system("sudo yum -y remove #{get_agent_flavor} > /dev/null")).to be_truthy
+        expect(system("sudo yum -y remove #{get_agent_flavor}")).to be_truthy
       elsif system('which zypper &> /dev/null')
         expect(system("sudo zypper --non-interactive remove #{get_agent_flavor} > /dev/null")).to be_truthy
       else
