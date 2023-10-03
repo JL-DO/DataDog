@@ -21,6 +21,7 @@
     paths:
       - $CI_PROJECT_DIR/$SYSTEM_PROBE_BINARIES_DIR/system-probe
       - $CI_PROJECT_DIR/sysprobe-build-outputs.tar.xz
+      - $CI_PROJECT_DIR/compile_commands.json
 
 build_system-probe-x64:
   stage: binary_build

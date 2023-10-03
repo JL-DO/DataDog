@@ -1687,5 +1687,4 @@ def save_build_outputs(ctx, destfile):
                 ctx.run(f"mkdir -p {outdir}")
                 ctx.run(f"cp {outputitem['output']} {outdir}/")
 
-        with ctx.cd(stagedir):
-            ctx.run(f"tar -cJf {absdest} *")
+        ctx.run(f"tar -C {stagedir} -cJf {absdest} .")
