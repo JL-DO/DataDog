@@ -39,13 +39,13 @@
 # Kitchen: final test matrix (tests * scenarios)
 # ----------------------------------------------
 
-kitchen_suse_install_script_agent-a6:
+kitchen_suse_install_script_agent_x64-a6:
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_x64_a6
     - .kitchen_test_install_script_agent
 
-kitchen_suse_install_script_agent-a7:
+kitchen_suse_install_script_agent_x64-a7:
   # Run install script test on branches, on a reduced number of platforms
   rules:
     !reference [.on_default_kitchen_tests_a7]
@@ -54,12 +54,12 @@ kitchen_suse_install_script_agent-a7:
     - .kitchen_scenario_suse_x64_a7
     - .kitchen_test_install_script_agent
 
-kitchen_suse_install_script_iot_agent-a7:
+kitchen_suse_install_script_iot_agent_x64-a7:
   extends:
     - .kitchen_scenario_suse_x64_a7
     - .kitchen_test_install_script_iot_agent
 
-kitchen_suse_install_script_dogstatsd-a7:
+kitchen_suse_install_script_dogstatsd_x64-a7:
   extends:
     - .kitchen_scenario_suse_x64_a7
     - .kitchen_test_install_script_dogstatsd
@@ -67,7 +67,7 @@ kitchen_suse_install_script_dogstatsd-a7:
 # We only want to run step-by-step tests on deploy pipelines,
 # which is why they have a different rule (if_deploy_6/7)
 
-kitchen_suse_step_by_step_agent-a6:
+kitchen_suse_step_by_step_agent_x64-a6:
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_x64_a6
@@ -75,7 +75,7 @@ kitchen_suse_step_by_step_agent-a6:
   rules:
     !reference [.on_deploy_a6]
 
-kitchen_suse_step_by_step_agent-a7:
+kitchen_suse_step_by_step_agent_x64-a7:
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_x64_a7
@@ -97,30 +97,30 @@ kitchen_suse_step_by_step_agent-a7:
 #     - .kitchen_scenario_suse_x64_a7
 #     - .kitchen_test_upgrade5_agent
 
-kitchen_suse_upgrade6_agent-a6:
+kitchen_suse_upgrade6_agent_x64-a6:
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_x64_a6
     - .kitchen_test_upgrade6_agent
 
-kitchen_suse_upgrade6_agent-a7:
+kitchen_suse_upgrade6_agent_x64-a7:
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_x64_a7
     - .kitchen_test_upgrade6_agent
 
-kitchen_suse_upgrade7_agent-a7:
+kitchen_suse_upgrade7_agent_x64-a7:
   extends:
     - .kitchen_os_with_cws
     - .kitchen_scenario_suse_x64_a7
     - .kitchen_test_upgrade7_agent
 
-kitchen_suse_upgrade7_iot_agent-a7:
+kitchen_suse_upgrade7_iot_agent_x64-a7:
   extends:
     - .kitchen_scenario_suse_x64_a7
     - .kitchen_test_upgrade7_iot_agent
 
-kitchen_suse_process_agent-a7:
+kitchen_suse_process_agent_x64-a7:
   variables:
     KITCHEN_OSVERS: "sles-15"
     DEFAULT_KITCHEN_OSVERS: "sles-15"
