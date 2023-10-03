@@ -37,7 +37,7 @@ var status = expvar.NewMap("compliance")
 const (
 	// defaultEvalThrottling is the time that space out rule evaluation to avoid CPU
 	// spikes.
-	defaultEvalThrottling = 2 * time.Second
+	defaultEvalThrottling = 10 * time.Millisecond
 
 	// defaultCheckInterval defines the default value used as interval for
 	// executing benchmarks.
@@ -47,7 +47,7 @@ const (
 	// executing benchmarks with a low priority: usually because of the
 	// compute overhead of executing such benchmarks, or the nature of
 	// configurations which tend to be constant.
-	defaultCheckIntervalLowPriority = 3 * time.Hour
+	defaultCheckIntervalLowPriority = 5 * time.Minute
 )
 
 // AgentOptions holds the different options to configure the compliance agent.

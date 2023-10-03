@@ -1,0 +1,35 @@
+--- a/src/OVAL/oval_agent.c
++++ b/src/OVAL/oval_agent.c
+@@ -265,7 +265,7 @@ void oval_agent_reset_results(oval_agent_session_t * ag_sess) {
+ 		oval_results_model_free(ag_sess->res_model);
+ 		ag_sess->res_model = oval_results_model_new_with_probe_session(
+ 				ag_sess->def_model, ag_sess->sys_models, ag_sess->psess);
+-		oval_probe_session_reinit(ag_sess->psess, ag_sess->sys_model);
++		oval_probe_session_reset(ag_sess->psess, ag_sess->sys_model);
+ 	}
+ #endif
+ }
+--- a/src/OVAL/probes/probe/probe_main.c
++++ b/src/OVAL/probes/probe/probe_main.c
+@@ -87,10 +87,10 @@ static SEXP_t *probe_reset(SEXP_t *arg0, void *arg1)
+          * FIXME: implement main loop locking & worker waiting
+          */
+ 	probe_rcache_free(probe->rcache);
+-        probe_ncache_free(probe->ncache);
+ 
+         probe->rcache = probe_rcache_new();
+-        probe->ncache = probe_ncache_new();
++        probe_ncache_clear(OSCAP_GSYM(ncache));
++        probe->ncache = OSCAP_GSYM(ncache);
+ 
+         return(NULL);
+ }
+@@ -211,7 +211,7 @@ void *probe_common_main(void *arg)
+ 	if (probe.sd < 0)
+ 		fail(errno, "SEAP_openfd2", __LINE__ - 3);
+ 
+-	if (SEAP_cmd_register(probe.SEAP_ctx, PROBECMD_RESET, 0, &probe_reset) != 0)
++	if (SEAP_cmd_register(probe.SEAP_ctx, PROBECMD_RESET, SEAP_CMDREG_USEARG, &probe_reset, &probe, NULL) != 0)
+ 		fail(errno, "SEAP_cmd_register", __LINE__ - 1);
+ 
+ 	/*

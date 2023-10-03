@@ -61,6 +61,9 @@ build do
   patch source: "session-print-syschar.patch", env: env # add a function to print system characteristics
   patch source: "memusage-cgroup.patch", env: env # consider cgroup when determining memory usage
 
+  patch source: "dpkginfo-cache-close.patch", env: env # close cache at the end of dpkginfo_get_by_name
+  patch source: "oval_probe_session_reset.patch", env: env # use oval_probe_session_reset
+
   patch source: "oscap-io.patch", env: env # add new oscap-io tool
 
   env["CC"] = "/opt/gcc-#{ENV['GCC_VERSION']}/bin/gcc"
