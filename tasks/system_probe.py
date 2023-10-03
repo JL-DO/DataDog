@@ -1671,6 +1671,7 @@ def save_build_outputs(ctx, destfile):
     if not destfile.endswith(".tar.xz"):
         raise Exit(message="destfile must be a .tar.xz file")
 
+    absdest = os.path.abspath(destfile)
     with tempfile.TemporaryDirectory() as stagedir:
         with open("compile_commands.json", "r") as compiledb:
             for outputitem in json.load(compiledb):
@@ -1687,4 +1688,4 @@ def save_build_outputs(ctx, destfile):
                 ctx.run(f"cp {outputitem['output']} {outdir}/")
 
         with ctx.cd(stagedir):
-            ctx.run(f"tar -cJf {destfile} *")
+            ctx.run(f"tar -cJf {absdest} *")
