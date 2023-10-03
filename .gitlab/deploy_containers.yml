@@ -115,6 +115,13 @@ deploy_containers-dogstatsd:
     - export IMG_SOURCES="${SRC_DSD}:v${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}-amd64,${SRC_DSD}:v${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}-arm64"
     - export IMG_DESTINATIONS="${DSD_REPOSITORY}:${VERSION}"
 
+fake_deploy_containers-a7_internal:
+  stage: deploy_containers
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64$DATADOG_AGENT_BUILDIMAGES_SUFFIX:$DATADOG_AGENT_BUILDIMAGES
+  rules:
+    when: on_success
+  script:
+    - echo "Job deploy container"
 
 deploy_containers-a7_internal:
   extends: .deploy_containers-a7-base
@@ -194,7 +201,8 @@ check_failure_for_manual:
 deploy_containers-a7_internal-rc_on_failure:
   extends: .deploy_containers-a7-base
   rules:
-    !reference [.on_deploy_a7_internal_rc_manual]
+    # !reference [.on_deploy_a7_internal_rc_manual]
+    - when: manual
   variables:
     VERSION: 7-rc
   needs: ["check_failure_for_manual"]
