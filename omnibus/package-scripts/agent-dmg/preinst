@@ -86,13 +86,13 @@ if [ -e "$CONF_DIR/datadog.conf" ] || [ -e "$CONF_DIR/datadog.yaml" ]; then
     sudo -Hu "$INSTALL_USER" launchctl unload -w "$USER_HOME/Library/LaunchAgents/com.datadoghq.agent.plist" || true
 
     # Save old conf
-    rm -rvf /tmp/checks.d/* /tmp/conf.d/* /tmp/datadog.conf /tmp/datadog.yaml
-    mkdir -vp /tmp/checks.d
-    mkdir -vp /tmp/conf.d
-    cp -vf $CONF_DIR/datadog.conf /tmp
-    cp -vf $CONF_DIR/datadog.yaml /tmp
-    cp -vfR $CONF_DIR/conf.d/* /tmp/conf.d
-    find /tmp/conf.d '(' -name '*.yaml.example' -o -name '*.yaml.default' ')' -delete -print # don't save old example and default yamls
+    rm -rvf $INSTALL_DIR/tmp/checks.d/* $INSTALL_DIR/tmp/conf.d/* $INSTALL_DIR/tmp/datadog.conf $INSTALL_DIR/tmp/datadog.yaml
+    mkdir -vp $INSTALL_DIR/tmp/checks.d
+    mkdir -vp $INSTALL_DIR/tmp/conf.d
+    cp -vf $CONF_DIR/datadog.conf $INSTALL_DIR/tmp
+    cp -vf $CONF_DIR/datadog.yaml $INSTALL_DIR/tmp
+    cp -vfR $CONF_DIR/conf.d/* $INSTALL_DIR/tmp/conf.d
+    find $INSTALL_DIR/tmp/conf.d '(' -name '*.yaml.example' -o -name '*.yaml.default' ')' -delete -print # don't save old example and default yamls
     cp -vfR $CONF_DIR/checks.d/* /tmp/checks.d
 fi
 
