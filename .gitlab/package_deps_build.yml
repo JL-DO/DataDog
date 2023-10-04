@@ -13,7 +13,7 @@
     - tar -xf sysprobe-build-outputs.tar.xz
     - inv -e system-probe.generate-minimized-btfs --source-dir "$CI_PROJECT_DIR/btfs-$ARCH" --output-dir "$CI_PROJECT_DIR/minimized-btfs" --input-bpf-programs "$CI_PROJECT_DIR/pkg/ebpf/bytecode/build/co-re"
     - cd minimized-btfs
-    - tar -cJf minimized-btfs.tar.xz *
+    - tar -cJf $CI_PROJECT_DIR/minimized-btfs.tar.xz *
   variables:
     KUBERNETES_MEMORY_REQUEST: "6Gi"
     KUBERNETES_MEMORY_LIMIT: "12Gi"
